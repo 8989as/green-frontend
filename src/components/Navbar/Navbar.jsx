@@ -11,7 +11,7 @@ import {
   faLanguage
 } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.rtl.min.css';
-import './Navbar.css';
+import './Navbar.css'; // Only for colors, font, and minor tweaks
 import './CartBadge.css';
 import { useCart } from '../../contexts/CartContext.jsx';
 import NavAuthButtons from '../Auth/NavAuthButtons.jsx';
@@ -25,7 +25,6 @@ const Navbar = () => {
   const { cartItemCount, recentlyUpdated } = useCart();
   const [animateCart, setAnimateCart] = React.useState(false);
 
-  // Add animation when cart updates
   React.useEffect(() => {
     if (recentlyUpdated) {
       setAnimateCart(true);
@@ -54,105 +53,79 @@ const Navbar = () => {
       : 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css';
   };
 
-  const menuItems = [
-    { id: 'home', label: t('home'), isActive: true },
-    { id: 'store', label: t('store') },
-    { id: 'about', label: t('about') },
-    { id: 'landscaping', label: t('landscaping') },
-    { id: 'contact', label: t('contact') }
-  ];
-
-  // Reverse menu items for LTR
-  const displayedMenuItems = isRTL ? menuItems : [...menuItems].reverse();
-
   const categories = [
     { id: 'summerPlants', label: t('summerPlants') },
     { id: 'winterPlants', label: t('winterPlants') },
     { id: 'naturalGrass', label: t('naturalGrass') },
     { id: 'trees', label: t('trees') },
   ];
-
-  // Reverse categories for LTR
   const displayedCategories = isRTL ? categories : [...categories].reverse();
 
   return (
-    <div className={`Frame117 ${isRTL ? 'rtl' : 'ltr'}`}>
-      <div className="Frame116">
-        <div className="Frame115">
-          <div className={`Frame114 ${isRTL ? 'order-1' : 'order-2'}`}>
-            <NavLink to="/" className="MasaratcoLogo1-link">
-              <img
-                className="MasaratcoLogo1"
-                src="assets/images/logo.svg"
-                alt="Masaratco Logo"
-              />
+    <>
+      <nav className="navbar navbar-expand-lg py-0 pt-4" >
+        <div className="container-fluid px-3 px-md-5">
+          {/* Logo & Toggler */}
+          <NavLink to="/" className="navbar-brand p-0 me-3">
+            <img
+              className="MasaratcoLogo1"
+              src="assets/images/logo.svg"
+              alt="Masaratco Logo"
+              style={{ height: 64 }}
+            />
+          </NavLink>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          {/* NavLinks - Collapsible */}
+          <div className="collapse navbar-collapse" id="mainNavbar">
+            <div className="navbar-nav ms-lg-3 gap-lg-3">
+              <NavLink to="/" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('home')}</NavLink>
+              <NavLink to="/products" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('store')}</NavLink>
+              <NavLink to="/landscape" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('landscaping')}</NavLink>
+              <NavLink to="/about" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('about')}</NavLink>
+              <NavLink to="/contact" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('contact')}</NavLink>
+            </div>
+          </div>
+          {/* Icons & Auth */}
+          <div className="d-flex align-items-center ms-auto gap-2">
+            <NavLink to="/cart" className="icon-frame position-relative">
+              <img src="assets/images/navCart.svg" alt="cart" />
+              {cartItemCount > 0 && (
+                <span className={`cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill ${animateCart ? 'animated' : ''}`}>{cartItemCount}</span>
+              )}
             </NavLink>
-            <div className="Frame22">
-              <NavLink to="/" className={({ isActive }) => `menu-link${isActive ? ' active' : ''}`}>{t('home')}</NavLink>
-              <NavLink to="/products" className={({ isActive }) => `menu-link${isActive ? ' active' : ''}`}>{t('store')}</NavLink>
-              <NavLink to="/landscape" className={({ isActive }) => `menu-link${isActive ? ' active' : ''}`}>{t('landscaping')}</NavLink>
-              <NavLink to="/about" className={({ isActive }) => `menu-link${isActive ? ' active' : ''}`}>{t('about')}</NavLink>
-              <NavLink to="/contact" className={({ isActive }) => `menu-link${isActive ? ' active' : ''}`}>{t('contact')}</NavLink>
-            </div>
+            <NavLink to="/wishlist" className="icon-frame">
+              <img src="assets/images/navFavorite.svg" alt="fav" />
+            </NavLink>
+            <NavAuthButtons />
+            <button className="icon-frame" onClick={toggleLanguage}>
+              <img src="assets/images/lang.svg" alt="" />
+            </button>
           </div>
-          <div className={`Frame113 ${isRTL ? 'order-1' : 'order-2'}`}>
-            {/* <div className="Frame23">
-              <FontAwesomeIcon icon={faSearch} className="search-icon" />
-              <input
-                type="text"
-                placeholder={t('search')}
-                className="search-input"
-                style={{ textAlign: isRTL ? 'right' : 'left' }}
-              />
-            </div> */}
-            <div className="Frame112">
-              {/* <NavLink to="/profile" className="icon-frame">
-                <img src="assets/images/navProfile.svg" alt="Profile" />
-              </NavLink> */}
-              <NavLink to="/cart" className="icon-frame cart-icon-wrapper">
-                {/* <FontAwesomeIcon icon={faShoppingCart} className="icon-vector" />
-                 */}
-                 <img src="assets/images/navCart.svg" alt="cart" />
-                {cartItemCount > 0 && (
-                  <span className={`cart-badge ${animateCart ? 'animated' : ''}`}>{cartItemCount}</span>
-                )}
-              </NavLink>
-              <NavLink to="/wishlist" className="icon-frame">
-                {/* <FontAwesomeIcon icon={faHeart} className="icon-vector" /> */}
-                <img src="assets/images/navFavorite.svg" alt="fav" />
-              </NavLink>
-              <NavAuthButtons />
-              <button className="icon-frame" onClick={toggleLanguage}>
-                {/* <FontAwesomeIcon icon={faLanguage} className="icon-vector" /> */}
-                <img src="assets/images/lang.svg" alt="" />
-              </button>
-            </div>
-          </div>
-
         </div>
-
-        <div className="Frame31">
-
-          <div className={`categories-wrapper ${isRTL ? 'rtl' : 'ltr'}`}>
-            <div className="Frame24">
-              <img
-                className="categories-icon"
-                src="assets/images/cat_icon.svg"
-                alt="Categories Icon"
-              />
-              <div className="categories-label">{t('categories')}</div>
-            </div>
-            {displayedCategories.map((category) => (
-              <div key={category.id} className="category-frame">
-                <div className="category-text">
-                  {category.label}
-                </div>
-              </div>
-            ))}
+      </nav>
+      {/* Categories Bar now outside the nav */}
+      <div className="container-fluid px-3 px-md-5 border-top mt-2 pt-4 pb-2">
+        <div className="d-flex align-items-center gap-3 flex-wrap">
+          <div className="d-flex align-items-center gap-2 px-2">
+            <img
+              className="categories-icon"
+              src="assets/images/cat_icon.svg"
+              alt="Categories Icon"
+            />
+            <div className="categories-label">{t('categories')}</div>
           </div>
+          {displayedCategories.map((category) => (
+            <div key={category.id} className="category-frame px-3 py-2">
+              <div className="category-text">
+                {category.label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
