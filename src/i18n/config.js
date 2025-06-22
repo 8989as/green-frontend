@@ -8,7 +8,7 @@ const resources = {
     translations: {
       search: 'إبحث فى جميع منتاجات المتجر ...',
       contact: 'تواصل معنا',
-      landscaping: 'أعمال اللاند سكيب',
+      landscaping: 'تنسيق و صيانة الحدائق',
       about: 'من نحن',
       store: 'المتجر',
       home: 'الرئيسية',

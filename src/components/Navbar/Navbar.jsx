@@ -68,7 +68,8 @@ const Navbar = () => {
   const categories = [
     { id: 'summerPlants', label: t('summerPlants') },
     { id: 'winterPlants', label: t('winterPlants') },
-    { id: 'naturalGrass', label: t('naturalGrass') }
+    { id: 'naturalGrass', label: t('naturalGrass') },
+    { id: 'trees', label: t('trees') },
   ];
 
   // Reverse categories for LTR
@@ -95,7 +96,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className={`Frame113 ${isRTL ? 'order-1' : 'order-2'}`}>
-            <div className="Frame23">
+            {/* <div className="Frame23">
               <FontAwesomeIcon icon={faSearch} className="search-icon" />
               <input
                 type="text"
@@ -103,23 +104,27 @@ const Navbar = () => {
                 className="search-input"
                 style={{ textAlign: isRTL ? 'right' : 'left' }}
               />
-            </div>
+            </div> */}
             <div className="Frame112">
-              <NavLink to="/profile" className="icon-frame">
+              {/* <NavLink to="/profile" className="icon-frame">
                 <img src="assets/images/navProfile.svg" alt="Profile" />
-              </NavLink>
+              </NavLink> */}
               <NavLink to="/cart" className="icon-frame cart-icon-wrapper">
-                <FontAwesomeIcon icon={faShoppingCart} className="icon-vector" />
+                {/* <FontAwesomeIcon icon={faShoppingCart} className="icon-vector" />
+                 */}
+                 <img src="assets/images/navCart.svg" alt="cart" />
                 {cartItemCount > 0 && (
                   <span className={`cart-badge ${animateCart ? 'animated' : ''}`}>{cartItemCount}</span>
                 )}
               </NavLink>
               <NavLink to="/wishlist" className="icon-frame">
-                <FontAwesomeIcon icon={faHeart} className="icon-vector" />
+                {/* <FontAwesomeIcon icon={faHeart} className="icon-vector" /> */}
+                <img src="assets/images/navFavorite.svg" alt="fav" />
               </NavLink>
               <NavAuthButtons />
               <button className="icon-frame" onClick={toggleLanguage}>
-                <FontAwesomeIcon icon={faLanguage} className="icon-vector" />
+                {/* <FontAwesomeIcon icon={faLanguage} className="icon-vector" /> */}
+                <img src="assets/images/lang.svg" alt="" />
               </button>
             </div>
           </div>

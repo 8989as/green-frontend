@@ -35,7 +35,8 @@ const NavAuthButtons = () => {
           onClick={handleAuthButtonClick}
           aria-label={isAuthenticated ? t('accountMenu') : t('signIn')}
         >
-          <FontAwesomeIcon icon={faUser} className="icon-vector" />
+          {/* <FontAwesomeIcon icon={faUser} className="icon-vector" /> */}
+          <img src="assets/images/navProfile.svg" alt="Profile" />
         </button>
         
         {/* User dropdown menu when authenticated */}
