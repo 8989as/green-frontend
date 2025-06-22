@@ -14,6 +14,7 @@ import Checkout from './pages/Checkout';
 import Orders from './pages/Orders';
 import Profile from './pages/Profile';
 import ProductDetails from './pages/ProductDetails';
+import EventsPage from './pages/EventsPage.jsx';
 import AuthRoute from './components/Auth/AuthRoute';
 
 // Import all context providers
@@ -53,6 +54,7 @@ function App() {
                     <Route path="/landscape" element={<Landscape />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/events" element={<EventsPage />} />
                     
                     {/* Protected Routes */}
                     <Route path="/cart" element={

@@ -83,6 +83,7 @@ const Navbar = () => {
               <NavLink to="/" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('home')}</NavLink>
               <NavLink to="/products" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('store')}</NavLink>
               <NavLink to="/landscape" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('landscaping')}</NavLink>
+              <NavLink to="/events" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('event')}</NavLink>
               <NavLink to="/about" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('about')}</NavLink>
               <NavLink to="/contact" className={({ isActive }) => `menu-link nav-link${isActive ? ' active' : ''}`}>{t('contact')}</NavLink>
             </div>
