@@ -2,6 +2,7 @@
   width: 429px;
   height: 604px;
   position: relative;
+  background-color: white;
 }
 
 .image-layer {
@@ -21,7 +22,7 @@
   left: 0;
   top: 0;
   position: absolute;
-  background: #ecf3ec;
+  /* background: #ecf3ec; */
   border-top-left-radius: 110px;
   border-top-right-radius: 110px;
   background-image: url('assets/images/pattern.svg');

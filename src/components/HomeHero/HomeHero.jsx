@@ -4,44 +4,24 @@ import './HomeHero.css';
 
 const HomeHero = () => {
     return (
-        <div className="hero-container">
-            <div className="hero-content">
-                <div className="hero-text">
-                    <h1 className="hero-title">
-من قلب الرياض إلى كل أرجاء المملكة  نباتات تزدهر بالحُب والعناية                    </h1>
-                    <p className="hero-description">
-                        في مزارع ومشاتل مساراتكو، نقدم لك تشكيلة متميزة من نباتات الزينة، الداخلية والخارجية، مزروعة بأحدث التقنيات وتحت إشراف نخبة من الخبراء الزراعيين. نوصلك بالجمال الطبيعي، أينما كنت، بجودة لا تُضاهى وخدمة لا تُنسى.
-                    </p>
-
-                    <button className="hero-cta">تسوق الآن</button>
-                </div>
-
-                <div className="image">
-                    <ImageComponent />
-                </div>
-                {/* <div className="hero-image-container">
-                    <div className="hero-bg-pattern">
-                        <img
-                            src="/assets/images/pattern-bg.svg"
-                            alt="Background pattern"
-                            className="pattern-bg"
-                        />
+        <section className="hero-section bg-white">
+            <div className="container-fluid px-4 px-lg-5 py-5">
+                <div className="row align-items-center justify-content-between g-5 flex-lg-row flex-column-reverse">
+                    <div className="col-lg-6 d-flex flex-column align-items-lg-end align-items-center text-lg-start text-center hero-text">
+                        <h1 className="hero-title mb-4">
+                            من قلب الرياض إلى كل أرجاء المملكة  نباتات تزدهر بالحُب والعناية
+                        </h1>
+                        <p className="hero-description mb-4">
+                            في مزارع ومشاتل مساراتكو، نقدم لك تشكيلة متميزة من نباتات الزينة، الداخلية والخارجية، مزروعة بأحدث التقنيات وتحت إشراف نخبة من الخبراء الزراعيين. نوصلك بالجمال الطبيعي، أينما كنت، بجودة لا تُضاهى وخدمة لا تُنسى.
+                        </p>
+                        <button className="hero-cta mt-2">تسوق الآن</button>
                     </div>
-                    <div className="hero-main-content">
-                        <img
-                            src="/assets/images/hero-image.svg"
-                            alt="Decorative plant"
-                            className="hero-image"
-                        />
-                        <div className="hero-features">
-                            <div className="feature-badge top">جودة ممتازة</div>
-                            <div className="feature-badge right">توصيل سريع</div>
-                            <div className="feature-badge left">خدمة ما بعد البيع</div>
-                        </div>
+                    <div className="col-lg-6 d-flex justify-content-center align-items-center hero-image-container mb-4 mb-lg-0">
+                        <ImageComponent />
                     </div>
-                </div> */}
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 

@@ -468,7 +468,7 @@ const ProductDetails = () => {
           {/* Left Column - Product Images */}
           <div className="product-images-column">
             <div className="main-product-image">
-              <div className="image-container">
+              <div className="product-image-container">
                 <img 
                   className="product-image" 
                   src={product.images && product.images.length > 0 
