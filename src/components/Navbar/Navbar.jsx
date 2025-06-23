@@ -100,9 +100,9 @@ const Navbar = () => {
               <img src="assets/images/navFavorite.svg" alt="fav" />
             </NavLink>
             <NavAuthButtons />
-            <button className="icon-frame" onClick={toggleLanguage}>
+            {/* <button className="icon-frame" onClick={toggleLanguage}>
               <img src="assets/images/lang.svg" alt="" />
-            </button>
+            </button> */}
           </div>
         </div>
       </nav>

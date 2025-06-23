@@ -2,6 +2,8 @@ import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import '../components/contact.css';
 import { useTranslation } from 'react-i18next';
+import { faPhone, faEnvelope, faMapPin } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Contact = () => {
   const { t, i18n } = useTranslation();
@@ -18,7 +20,8 @@ const Contact = () => {
             <div className="contact-info-item">
               <div className="contact-info-header">
                 <div className="info-icon-wrapper">
-                  <img src="https://placehold.co/18x18/3D853C/ECF3EC?text=L" alt="Location Icon" className="info-icon" />
+                  {/* <img src="https://placehold.co/18x18/3D853C/ECF3EC?text=L" alt="Location Icon" className="info-icon" /> */}
+                  <FontAwesomeIcon icon={faMapPin} className="info-icon" />
                 </div>
                 <h5 className="info-title mb-0">{isRTL ? 'العنوان' : 'Address'}</h5>
               </div>
@@ -28,7 +31,8 @@ const Contact = () => {
             <div className="contact-info-item">
               <div className="contact-info-header">
                 <div className="info-icon-wrapper">
-                  <img src="https://placehold.co/18x18/3D853C/ECF3EC?text=E" alt="Email Icon" className="info-icon" />
+                  {/* <img src="https://placehold.co/18x18/3D853C/ECF3EC?text=E" alt="Email Icon" className="info-icon" /> */}
+                  <FontAwesomeIcon icon={faEnvelope} className="info-icon" />
                 </div>
                 <h5 className="info-title mb-0">{isRTL ? 'البريد الإلكتروني' : 'Email'}</h5>
               </div>
@@ -45,7 +49,8 @@ const Contact = () => {
             <div className="contact-info-item">
               <div className="contact-info-header">
                 <div className="info-icon-wrapper">
-                  <img src="https://placehold.co/18x18/3D853C/ECF3EC?text=P" alt="Phone Icon" className="info-icon" />
+                  {/* <img src="https://placehold.co/18x18/3D853C/ECF3EC?text=P" alt="Phone Icon" className="info-icon" /> */}
+                  <FontAwesomeIcon icon={faPhone} className="info-icon" />
                 </div>
                 <h5 className="info-title mb-0">{isRTL ? 'أرقام الجوال' : 'Phone Numbers'}</h5>
               </div>
@@ -110,11 +115,11 @@ const Contact = () => {
               <div className="col-12 submit-btn-wrapper"> 
                 <button type="submit" className="btn btn-primary">
                   <span>{isRTL ? 'إرسال' : 'Send'}</span>
-                  <img 
+                  {/* <img 
                     src="https://placehold.co/16x17/FFFFFF/FFFFFF?text=%3E" 
                     alt="Send Icon" 
                     className="send-icon" 
-                  />
+                  /> */}
                 </button>
               </div>
             </form>
