@@ -130,6 +130,7 @@ const resources = {
       securePaymentMessage: 'جميع المعاملات مشفرة وآمنة',
       noItems: 'لا توجد منتجات في سلة التسوق',
       failedToAddToCart: 'فشل إضافة المنتج للسلة',
+      latestAddedProducts: 'النباتات المضافة حديثاً',
       
       // Orders page translations
       myAccount: 'حسابي',
@@ -194,6 +195,7 @@ const resources = {
       shrubs: 'Shrubs',
       trees: 'Trees',
       plantCategories: 'Plant Categories',
+      latestAddedProducts: 'Latest Added Products',
       
       // Auth required messages
       authenticationRequired: 'Authentication Required',

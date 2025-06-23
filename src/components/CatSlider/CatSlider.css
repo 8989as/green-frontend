@@ -1,5 +1,6 @@
 .cat-slider-container {
   padding: 20px 0;
+  background-color: #ffffff;
 }
 
 .rtl {
@@ -18,10 +19,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  background-color: #f8f9fa;
   gap: 20px;
 }
 .category-card {
-  background-color: #f8f9fa;
+  background-color: #a6c7a540;
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -57,4 +59,8 @@
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   /* color: #3D853C; */
   font-family: 'El Messiri', sans-serif;
+}
+
+.hover-controls {
+  transition: opacity 0.3s ease;
 }
