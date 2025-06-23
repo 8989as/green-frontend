@@ -38,14 +38,16 @@ const ProductCard = ({
                 </div>
                 <div className="card-body d-flex flex-column flex-grow-1 justify-content-between p-3 gap-3">
                     <div className="w-100">
-                        <h5 className="product-title card-title text-center mb-1" style={{ fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden' }}>{name}</h5>
-                        <p className="product-subtitle card-subtitle text-center mb-2" style={{ fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden' }}>{latinName}</p>
-                    </div>
-                    <div className="d-flex justify-content-center align-items-center gap-2 mb-2">
-                        <span className="product-price" style={{ fontSize: '1.1rem', fontWeight: 700 }}>{price}</span>
-                        <span className="price-symbol d-flex align-items-center">
-                            <img src="assets/images/sar.svg" className="price-symbol-img" alt="SAR" />
-                        </span>
+                        <h5 className="product-title card-title text-start mb-1" style={{ fontSize: '1.3rem', whiteSpace: 'nowrap', overflow: 'hidden' }}>{name}</h5>
+                        <div className="d-flex justify-content-between align-items-center mb-2">
+                            <span className="product-subtitle card-subtitle text-start" style={{ fontSize: '1.3rem', whiteSpace: 'nowrap', overflow: 'hidden' }}>{latinName}</span>
+                            <span className="d-flex align-items-baseline gap-1">
+                                <span className="product-price" style={{ fontSize: '1.5rem', fontWeight: 700 }}>{price}</span>
+                                <span className="price-symbol d-flex align-items-baseline">
+                                    <img src="assets/images/sar.svg" className="price-symbol-img" alt="SAR" style={{ height: '1.1rem', verticalAlign: 'baseline', marginBottom: '2px' }} />
+                                </span>
+                            </span>
+                        </div>
                     </div>
                     <div className="d-flex gap-2 mt-auto">
                         <button
