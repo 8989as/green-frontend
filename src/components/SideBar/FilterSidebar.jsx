@@ -25,7 +25,7 @@ const FilterSidebar = ({
               <div className="filter-sidebar-options">
                 {section.options.map((option) => (
                   <div key={option.value} className="form-check d-flex justify-content-between align-items-center py-2">
-                    <label className="form-check-label filter-sidebar-checkbox-label flex-grow-1 text-end">{option.label}</label>
+                    <label className="form-check-label filter-sidebar-checkbox-label flex-grow-1 text-start p-2">{option.label}</label>
                     <input
                       type="checkbox"
                       className="form-check-input filter-sidebar-checkbox"
@@ -38,17 +38,18 @@ const FilterSidebar = ({
               </div>
             )}
             {section.type === 'color' && (
-              <div className="filter-sidebar-color-grid row g-2">
+              <div className="row row-cols-2 g-2 filter-sidebar-color-grid">
                 {section.options.map((option, i) => (
-                  <div key={option.value} className="col-6">
+                  <div key={option.id} className="col">
                     <button
-                      className={`filter-sidebar-color-option d-flex align-items-center p-2${selectedColors.includes(option.value) ? ' selected' : ''}`}
-                      style={{ backgroundColor: option.value, width: '100%' }}
-                      onClick={() => onColorSelect(option.value)}
+                      type="button"
+                      className={`filter-sidebar-color-option d-flex align-items-center justify-content-center position-relative w-100${selectedColors.includes(option.id) ? ' selected' : ''}`}
+                      style={{ backgroundColor: option.hex_code || '#CCCCCC' }}
+                      onClick={() => onColorSelect(option.id)}
                       aria-label={option.label}
                     >
-                      <span className="color-swatch me-2" style={{ backgroundColor: option.value }}></span>
-                      <span className="filter-sidebar-color-label">{option.label}</span>
+                      <span className="color-swatch me-2" style={{ backgroundColor: option.hex_code || '#CCCCCC' }}></span>
+                      <span className="filter-sidebar-color-label position-absolute start-50 translate-middle-x mt-2">{option.label}</span>
                     </button>
                   </div>
                 ))}

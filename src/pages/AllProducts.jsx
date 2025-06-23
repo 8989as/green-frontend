@@ -30,6 +30,45 @@ const AllProducts = () => {
     const [allSizes, setAllSizes] = useState([]);
     const [priceLimits, setPriceLimits] = useState({ min: 0, max: 0 });
 
+    // Fetch filter options from API
+    useEffect(() => {
+        async function fetchFilters() {
+            try {
+                // Categories
+                const catRes = await axios.get('http://127.0.0.1:8000/api/v1/categories');
+                setAllCategories(
+                    (catRes.data.data || []).map(cat => ({
+                        id: cat.id,
+                        label: cat.name || `ID: ${cat.id}`,
+                        value: cat.id
+                    }))
+                );
+                // Colors
+                const colorRes = await axios.get('http://127.0.0.1:8000/api/v1/attributes/23');
+                setAllColors(
+                    (colorRes.data.data.options || []).map(opt => ({
+                        id: opt.id,
+                        label: opt.label || opt.name || `ID: ${opt.id}`,
+                        value: opt.id,
+                        hex_code: opt.swatch_value || opt.hex_code || '#CCCCCC'
+                    }))
+                );
+                // Sizes
+                const sizeRes = await axios.get('http://127.0.0.1:8000/api/v1/attributes/24');
+                setAllSizes(
+                    (sizeRes.data.data.options || []).map(opt => ({
+                        id: opt.id,
+                        label: opt.label || opt.name || `ID: ${opt.id}`,
+                        value: opt.id
+                    }))
+                );
+            } catch (e) {
+                // fallback: keep empty
+            }
+        }
+        fetchFilters();
+    }, []);
+
     // Fetch products
     useEffect(() => {
         setLoading(true);
@@ -38,38 +77,13 @@ const AllProducts = () => {
                 const products = res.data.data;
                 setProducts(products);
                 setFilteredProducts(products);
-                // Extract filter options
-                const categories = [];
-                const colors = [];
-                const sizes = [];
+                // Price range
                 let minPrice = null, maxPrice = null;
                 products.forEach(p => {
-                    // Categories
-                    p.categories.forEach(cat => {
-                        if (!categories.find(c => c.id === cat.id)) {
-                            categories.push({ id: cat.id, label: cat.name, value: cat.id });
-                        }
-                    });
-                    // Colors
-                    p.colors.forEach(col => {
-                        if (!colors.find(c => c.id === col.id)) {
-                            colors.push({ id: col.id, label: col.name, value: col.id });
-                        }
-                    });
-                    // Sizes
-                    p.sizes.forEach(sz => {
-                        if (!sizes.find(s => s.id === sz.id)) {
-                            sizes.push({ id: sz.id, label: sz.name, value: sz.id });
-                        }
-                    });
-                    // Price
                     const price = p.special_price ?? p.price;
                     if (minPrice === null || price < minPrice) minPrice = price;
                     if (maxPrice === null || price > maxPrice) maxPrice = price;
                 });
-                setAllCategories(categories);
-                setAllColors(colors);
-                setAllSizes(sizes);
                 setPriceLimits({ min: Math.floor(minPrice), max: Math.ceil(maxPrice) });
                 setPriceRange({ min: Math.floor(minPrice), max: Math.ceil(maxPrice), value: Math.ceil(maxPrice) });
                 setLoading(false);
@@ -80,22 +94,22 @@ const AllProducts = () => {
             });
     }, []);
 
-    // Filtering logic
+    // Filtering logic (by IDs)
     useEffect(() => {
         let filtered = products.filter(product => {
             // Category filter
             if (selectedCategories.length > 0) {
-                const catIds = product.categories.map(c => c.id);
+                const catIds = (product.categories || []).map(c => c.id);
                 if (!selectedCategories.some(id => catIds.includes(id))) return false;
             }
-            // Color filter
+            // Color filter (by color id)
             if (selectedColors.length > 0) {
-                const colorHexes = product.colors.map(c => c.hex_code);
-                if (!selectedColors.some(hex => colorHexes.includes(hex))) return false;
+                const colorIds = (product.colors || []).map(c => c.id);
+                if (!selectedColors.some(id => colorIds.includes(id))) return false;
             }
-            // Size filter
+            // Size filter (by size id)
             if (selectedSizes.length > 0) {
-                const sizeIds = product.sizes.map(s => s.id);
+                const sizeIds = (product.sizes || []).map(s => s.id);
                 if (!selectedSizes.some(id => sizeIds.includes(id))) return false;
             }
             // Price filter
@@ -128,12 +142,12 @@ const AllProducts = () => {
         },
         {
             key: 'price',
-            title: t('price') || 'السعر',
+            title: t('price'),
             type: 'price',
         },
     ];
 
-    // Checkbox change handler
+    // Checkbox change handler (IDs)
     const handleCheckboxChange = (sectionKey, value) => {
         if (sectionKey === 'categories') {
             setSelectedCategories(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
@@ -141,9 +155,9 @@ const AllProducts = () => {
             setSelectedSizes(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
         }
     };
-    // Color select handler
-    const handleColorSelect = (hex) => {
-        setSelectedColors(prev => prev.includes(hex) ? prev.filter(v => v !== hex) : [...prev, hex]);
+    // Color select handler (IDs)
+    const handleColorSelect = (colorId) => {
+        setSelectedColors(prev => prev.includes(colorId) ? prev.filter(v => v !== colorId) : [...prev, colorId]);
     };
     // Price change handler
     const handlePriceChange = (val) => {
@@ -237,7 +251,7 @@ const AllProducts = () => {
                     <div className="col-md-3">
                         <FilterSidebar
                             isRTL={isRTL}
-                            title={t('filterProducts') || 'تصفية المنتجات'}
+                            title={t('filterProducts') || 'تصفية النباتات'}
                             sections={sections}
                             onCheckboxChange={handleCheckboxChange}
                             onColorSelect={handleColorSelect}
@@ -250,7 +264,7 @@ const AllProducts = () => {
                         />
                     </div>
                     <div className="col-md-9">
-                        <h1 className="text-center mb-4">{t('allProducts') || 'كل المنتجات'}</h1>
+                        <h1 className="text-start mb-4">{t('allProducts') || 'كل المنتجات'}</h1>
                         {loading ? (
                             <div className="text-center py-5">{t('loading') || 'جاري التحميل...'}</div>
                         ) : error ? (

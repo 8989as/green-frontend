@@ -67,17 +67,23 @@ const SideBar = () => {
   };
 
   return (
-    <FilterSidebar
-      isRTL={isRTL}
-      title="تصفية المنتاجات"
-      sections={sections}
-      selectedCheckboxes={selectedCheckboxes}
-      selectedColors={selectedColors}
-      onCheckboxChange={handleCheckboxChange}
-      onColorSelect={handleColorSelect}
-      actionLabel="تصفية المنتاجات"
-      onAction={() => {}}
-    />
+    <div className="sidebar-container container-fluid p-0">
+      <div className="row">
+        <div className="col-12">
+          <FilterSidebar
+            isRTL={isRTL}
+            title="تصفية المنتاجات"
+            sections={sections}
+            selectedCheckboxes={selectedCheckboxes}
+            selectedColors={selectedColors}
+            onCheckboxChange={handleCheckboxChange}
+            onColorSelect={handleColorSelect}
+            actionLabel="تصفية المنتاجات"
+            onAction={() => {}}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 

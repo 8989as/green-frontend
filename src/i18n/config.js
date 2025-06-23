@@ -131,7 +131,8 @@ const resources = {
       noItems: 'لا توجد منتجات في سلة التسوق',
       failedToAddToCart: 'فشل إضافة المنتج للسلة',
       latestAddedProducts: 'النباتات المضافة حديثاً',
-      
+      filterProducts: 'تصفية النباتات',
+      allProducts: 'تسوق جميع النباتات ',
       // Orders page translations
       myAccount: 'حسابي',
       myOrders: 'طلباتي',
@@ -155,6 +156,8 @@ const resources = {
       estimatedDelivery: 'التسليم المتوقع',
       errorFetchingOrders: 'حدث خطأ أثناء تحميل الطلبات',
       loadingOrderDetails: 'جاري تحميل تفاصيل الطلب...',
+      sizes: 'الأحجام',
+      colors: 'الألوان',
       
       // Profile page translations
       accountDetails: 'تفاصيل الحساب',
@@ -196,6 +199,7 @@ const resources = {
       trees: 'Trees',
       plantCategories: 'Plant Categories',
       latestAddedProducts: 'Latest Added Products',
+      colors: 'Colors',
       
       // Auth required messages
       authenticationRequired: 'Authentication Required',
@@ -233,6 +237,7 @@ const resources = {
       otpVerified: 'Verification successful',
       invalidOTP: 'Invalid verification code',
       resendOTP: 'Resend code',
+      allProducts: 'Shop All Plants',
       
       // Auth translations
       login: 'Login',
@@ -299,7 +304,9 @@ const resources = {
       couponRemoved: 'Coupon removed',
       failedToUpdateQuantity: 'Failed to update quantity',
       failedToRemoveItem: 'Failed to remove item',
-      
+      filterProducts: 'Filter Plants',
+      sizes: 'Sizes',
+
       // Checkout page translations
       checkout: 'Checkout',
       shippingInformation: 'Shipping Information',
