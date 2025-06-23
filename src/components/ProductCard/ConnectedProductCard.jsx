@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import AuthModal from '../Auth/AuthModal';
-import { useAuth } from '../../contexts/AuthContext';
+import { isAuthenticated } from '../../contexts/AuthContext';
 import { useLocation } from 'react-router-dom';
 
 /**
@@ -23,7 +23,8 @@ const ConnectedProductCard = ({
   ...restProps
 }) => {
   const { addToCart, loading } = useCart();
-  const { isAuthenticated, otpSent } = useAuth();
+  // Use the new isAuthenticated function which returns a boolean
+  const authenticated = isAuthenticated();
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
   const location = useLocation();
@@ -32,6 +33,10 @@ const ConnectedProductCard = ({
   const [showAuthModal, setShowAuthModal] = useState(false);
   
   const handleAddToCart = async () => {
+    if (!authenticated) {
+      setShowAuthModal(true);
+      return;
+    }
     try {
       const success = await addToCart(id, 1);
       if (success) {
@@ -42,18 +47,12 @@ const ConnectedProductCard = ({
         });
       }
     } catch (error) {
-      // Check if this is an authentication error
-      if (error && error.type === 'AUTH_REQUIRED') {
-        // Show auth modal instead of error toast
-        setShowAuthModal(true);
-      } else {
-        // Show error notification for other errors
-        toast.error(t('failedToAddToCart'), {
-          position: isRTL ? "bottom-left" : "bottom-right",
-          autoClose: 3000,
-        });
-        console.error('Error adding to cart:', error);
-      }
+      // Show error notification for other errors
+      toast.error(t('failedToAddToCart'), {
+        position: isRTL ? "bottom-left" : "bottom-right",
+        autoClose: 3000,
+      });
+      console.error('Error adding to cart:', error);
     }
   };
 
@@ -75,10 +74,9 @@ const ConnectedProductCard = ({
       {/* Auth Modal for unauthenticated users */}
       <AuthModal 
         show={showAuthModal} 
-        onHide={() => {
-          if (!otpSent) setShowAuthModal(false);
-        }}
+        onHide={() => setShowAuthModal(false)}
         returnUrl={location.pathname} 
+        backdrop={true} // Allow closing modal by clicking outside
       />
     </>
   );
