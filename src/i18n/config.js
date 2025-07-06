@@ -98,7 +98,10 @@ const resources = {
       couponRemoved: 'تم إزالة الكوبون',
       failedToUpdateQuantity: 'فشل في تحديث الكمية',
       failedToRemoveItem: 'فشل في إزالة العنصر',
-      
+      addedToCart: 'تمت إضافة المنتج إلى السلة',
+      cartUpdated: 'تم تحديث السلة',
+      itemRemovedFromCart: 'تمت إزالة المنتج من السلة',
+      category: 'الفئة',
       // Checkout page translations
       checkout: 'الدفع',
       shippingInformation: 'معلومات الشحن',
@@ -176,7 +179,10 @@ const resources = {
       delivered: 'تم التسليم',
       loadingProfile: 'جاري تحميل الملف الشخصي...',
       failedToLoadProfile: 'فشل تحميل الملف الشخصي',
-      failedToLoadCart: 'فشل تحميل عربة التسوق'
+      failedToLoadCart: 'فشل تحميل عربة التسوق',
+      productDescription: 'وصف المنتج',
+      size:'الأحجام',
+      color:'الألوان'
     }
   },
   en: {
@@ -200,7 +206,9 @@ const resources = {
       plantCategories: 'Plant Categories',
       latestAddedProducts: 'Latest Added Products',
       colors: 'Colors',
-      
+      category: 'Category',
+      productDescription: 'Product Description',
+      price: 'Price',
       // Auth required messages
       authenticationRequired: 'Authentication Required',
       pleaseLoginToViewCart: 'Please log in to view your cart',
