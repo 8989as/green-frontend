@@ -7,7 +7,7 @@ import Breadcrumb from "../components/Breadcrumb/Breadcrumb";
 import AuthModal from "../components/Auth/AuthModal";
 import { useCart } from '../contexts/CartContext.jsx';
 import { useAuth } from '../contexts/AuthContext';
-import axios from 'axios';
+import { mockProducts } from '../data/mockData';
 import { toast } from 'react-toastify';
 import './ProductDetails.css';
 
@@ -37,39 +37,26 @@ const ProductDetails = () => {
     { label: product?.name || t('product'), url: `/product/${id}`, active: true }
   ];
 
-  // Fetch product details
+  // Fetch product details from mock data
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://127.0.0.1:8000/api/v1/products/${id}`)
-      .then(res => {
-        // The API response has data at the top level, directly in res.data.data
-        const productData = res.data.data;
-        
-        console.log('Product Data:', productData); // For debugging
-        
-        setProduct(productData);
-        
-        // Set favorite status from API response
-        if (productData.is_saved !== undefined) {
-          setIsFavorite(productData.is_saved);
-        }
-        
-        // Set default selections
-        if (productData.colors && productData.colors.length > 0) {
-          setSelectedColor(productData.colors[0]);
-        }
-        
-        if (productData.sizes && productData.sizes.length > 0) {
-          setSelectedSize(productData.sizes[0]);
-        }
-        
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Error fetching product:', err);
-        setError(t('failedToLoadProduct'));
-        setLoading(false);
-      });
+    // Find product by id (id from params is string, mock id is number)
+    const foundProduct = mockProducts.find(p => String(p.id) === String(id));
+    if (foundProduct) {
+      setProduct(foundProduct);
+      setIsFavorite(foundProduct.is_saved || false);
+      if (foundProduct.colors && foundProduct.colors.length > 0) {
+        setSelectedColor(foundProduct.colors[0]);
+      }
+      if (foundProduct.sizes && foundProduct.sizes.length > 0) {
+        setSelectedSize(foundProduct.sizes[0]);
+      }
+      setError(null);
+    } else {
+      setProduct(null);
+      setError(t('productNotFound') || 'لم يتم العثور على المنتج');
+    }
+    setLoading(false);
   }, [id, t]);
 
   // Handle quantity change
@@ -93,19 +80,17 @@ const ProductDetails = () => {
     setSelectedSize(size);
   };
 
-  // Handle favorite toggle
+  // Handle favorite toggle (mock only)
   const toggleFavorite = () => {
     if (!isAuthenticated) {
       toast.error(t('pleaseLoginToSaveItems'), {
         position: isRTL ? "bottom-left" : "bottom-right",
         autoClose: 3000,
       });
-      // navigate('/login');
       return;
     }
-    
-    setIsFavorite(!isFavorite);
-    // API call to toggle favorite status would go here
+    setIsFavorite(prev => !prev);
+    // In a real app, update favorite status in backend or context
   };
 
   // Handle image navigation
@@ -350,7 +335,7 @@ const ProductDetails = () => {
 
             <div className="product-price">
               <span className="price-amount">
-                {product.price}
+                {product.special_price ?? product.price}
               </span>
               <div className="currency-icon">
                 <img src="/assets/images/sar.svg" alt="SAR" width="24" height="24" />
@@ -381,20 +366,8 @@ const ProductDetails = () => {
                 <h2>{t('color') || 'اللون'}</h2>
                 <div className="color-selection">
                   {product.colors.map((color) => {
-                    // Map color names to hex codes - in a real app, these might come from the API
-                    const colorMap = {
-                      'أصفر': '#F99B18',
-                      'أبيض': '#FFFFFF',
-                      'أحمر': '#D40C0C',
-                      'أزرق': '#0C7CD4',
-                      'أخضر': '#0CD43C',
-                      'بنفسجى': '#A20CD4',
-                      'برتقالى': '#F99B18',
-                      'روز': '#FF96B2'
-                    };
-                    
-                    const hexColor = colorMap[color.name] || '#3D853C';
-                    
+                    // Use hex_code from mockData if available
+                    const hexColor = color.hex_code || '#3D853C';
                     return (
                       <div 
                         key={color.id} 

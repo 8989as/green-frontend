@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import axios from "axios";
 import { ConnectedProductCard } from "../components/ProductCard";
-// import SideBar from "../components/SideBar/SideBar";
 import FilterSidebar from "../components/SideBar/FilterSidebar";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import Breadcrumb from "../components/Breadcrumb/Breadcrumb";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { mockProducts, mockCategories, mockColors, mockSizes } from "../data/mockData";
 
 
 const AllProducts = () => {
@@ -30,68 +30,58 @@ const AllProducts = () => {
     const [allSizes, setAllSizes] = useState([]);
     const [priceLimits, setPriceLimits] = useState({ min: 0, max: 0 });
 
-    // Fetch filter options from API
+    // Initialize filter options with mock data
     useEffect(() => {
-        async function fetchFilters() {
-            try {
-                // Categories
-                const catRes = await axios.get('http://127.0.0.1:8000/api/v1/categories');
-                setAllCategories(
-                    (catRes.data.data || []).map(cat => ({
-                        id: cat.id,
-                        label: cat.name || `ID: ${cat.id}`,
-                        value: cat.id
-                    }))
-                );
-                // Colors
-                const colorRes = await axios.get('http://127.0.0.1:8000/api/v1/attributes/23');
-                setAllColors(
-                    (colorRes.data.data.options || []).map(opt => ({
-                        id: opt.id,
-                        label: opt.label || opt.name || `ID: ${opt.id}`,
-                        value: opt.id,
-                        hex_code: opt.swatch_value || opt.hex_code || '#CCCCCC'
-                    }))
-                );
-                // Sizes
-                const sizeRes = await axios.get('http://127.0.0.1:8000/api/v1/attributes/24');
-                setAllSizes(
-                    (sizeRes.data.data.options || []).map(opt => ({
-                        id: opt.id,
-                        label: opt.label || opt.name || `ID: ${opt.id}`,
-                        value: opt.id
-                    }))
-                );
-            } catch (e) {
-                // fallback: keep empty
-            }
-        }
-        fetchFilters();
+        // Set categories
+        setAllCategories(
+            mockCategories.map(cat => ({
+                id: cat.id,
+                label: cat.name,
+                value: cat.value
+            }))
+        );
+
+        // Set colors
+        setAllColors(
+            mockColors.map(color => ({
+                id: color.id,
+                label: color.label,
+                value: color.value,
+                hex_code: color.hex_code
+            }))
+        );
+
+        // Set sizes
+        setAllSizes(
+            mockSizes.map(size => ({
+                id: size.id,
+                label: size.label,
+                value: size.value
+            }))
+        );
     }, []);
 
-    // Fetch products
+    // Initialize products with mock data
     useEffect(() => {
         setLoading(true);
-        axios.get('http://127.0.0.1:8000/api/v1/products')
-            .then(res => {
-                const products = res.data.data;
-                setProducts(products);
-                setFilteredProducts(products);
-                // Price range
-                let minPrice = null, maxPrice = null;
-                products.forEach(p => {
-                    const price = p.special_price ?? p.price;
-                    if (minPrice === null || price < minPrice) minPrice = price;
-                    if (maxPrice === null || price > maxPrice) maxPrice = price;
-                });
-                setPriceLimits({ min: Math.floor(minPrice), max: Math.ceil(maxPrice) });
-                setPriceRange({ min: Math.floor(minPrice), max: Math.ceil(maxPrice), value: Math.ceil(maxPrice) });
-                setLoading(false);
-            })
-            .catch(err => {
-                setError('Failed to load products');
-                setLoading(false);
+        try {
+            setProducts(mockProducts);
+            setFilteredProducts(mockProducts);
+            
+            // Calculate price range from mock products
+            let minPrice = null, maxPrice = null;
+            mockProducts.forEach(p => {
+                const price = p.special_price ?? p.price;
+                if (minPrice === null || price < minPrice) minPrice = price;
+                if (maxPrice === null || price > maxPrice) maxPrice = price;
             });
+            setPriceLimits({ min: Math.floor(minPrice), max: Math.ceil(maxPrice) });
+            setPriceRange({ min: Math.floor(minPrice), max: Math.ceil(maxPrice), value: Math.ceil(maxPrice) });
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to load products');
+            setLoading(false);
+        }
     }, []);
 
     // Filtering logic (by IDs)
@@ -168,62 +158,34 @@ const AllProducts = () => {
         // No-op, filtering is live
     };
 
-    // Handle toggling favorite status
+    // Handle toggling favorite status with mock implementation
     const handleToggleFavorite = async (productId) => {
         try {
-            // Find the product in the state
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-            
-            // Determine if we're adding or removing from favorites
-            const action = product.is_saved ? 'remove' : 'add';
-            
-            // Get the auth token from localStorage
             const token = localStorage.getItem('token');
             if (!token) {
-                // If not logged in, redirect to login page
                 toast.info(t('loginToSaveFavorites') || 'Please login to save favorites');
-                // navigate('/login');
                 return;
             }
             
-            // Make API call to toggle favorite status
-            const endpoint = `http://127.0.0.1:8000/api/v1/favorites/${action}`;
-            const response = await axios.post(endpoint, 
-                { product_id: productId },
-                { headers: { Authorization: `Bearer ${token}` } }
+            // Update the product in state with toggled favorite status
+            const updatedProducts = products.map(p => 
+                p.id === productId ? { ...p, is_saved: !p.is_saved } : p
+            );
+            setProducts(updatedProducts);
+            setFilteredProducts(prevFiltered => 
+                prevFiltered.map(p => 
+                    p.id === productId ? { ...p, is_saved: !p.is_saved } : p
+                )
             );
             
-            if (response.status === 200) {
-                // Update the product in state
-                const updatedProducts = products.map(p => {
-                    if (p.id === productId) {
-                        return { ...p, is_saved: !p.is_saved };
-                    }
-                    return p;
-                });
-                
-                setProducts(updatedProducts);
-                
-                // Also update filtered products
-                const updatedFilteredProducts = filteredProducts.map(p => {
-                    if (p.id === productId) {
-                        return { ...p, is_saved: !p.is_saved };
-                    }
-                    return p;
-                });
-                
-                setFilteredProducts(updatedFilteredProducts);
-                
-                // Show success message
-                const message = action === 'add' ? 
-                    (t('addedToFavorites') || 'Added to favorites') : 
-                    (t('removedFromFavorites') || 'Removed from favorites');
-                toast.success(message);
-            }
+            toast.success(
+                !products.find(p => p.id === productId)?.is_saved
+                    ? t('addedToFavorites') || 'Added to favorites'
+                    : t('removedFromFavorites') || 'Removed from favorites'
+            );
         } catch (error) {
-            console.error('Error toggling favorite:', error);
-            toast.error(t('errorTogglingFavorite') || 'Error updating favorites');
+            toast.error(t('failedToUpdateFavorites') || 'Failed to update favorites');
+            console.error('Error updating favorite status:', error);
         }
     };
     
