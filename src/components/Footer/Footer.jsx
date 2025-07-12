@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 /**
  * A fully responsive footer component using Bootstrap 5.3.
  * * Best Practices Applied:
- * - Mobile-first responsive grid (`col-12`, `col-md-6`, `col-lg-3`).
- * - Bootstrap utility classes for spacing (`gy-4`, `gap-3`) and alignment.
+ * - Mobile-first responsive grid (`col-6`, `col-md-3`).
+ * - Bootstrap utility classes for spacing (`gy-5`, `gap-3`) and alignment.
  * - Responsive text alignment (`text-center`, `text-md-start`) to avoid extra CSS.
  * - Relies on Bootstrap's native RTL support (by setting `dir="rtl"` on the <html> tag)
  * instead of manual JavaScript checks, simplifying the component.
@@ -24,7 +24,7 @@ const Footer = () => {
           <div className="row gy-5">
 
             {/* Column 1: Contact Information */}
-            <div className="col-12 col-md-6 col-lg-3 text-center text-md-start">
+            <div className="col-6 col-md-3 text-center text-md-start">
               <h4 className="footer-title mb-4">تواصل معنا</h4>
               <div className="d-flex flex-column gap-3">
                 <div className="footer-contact-item">
@@ -43,7 +43,7 @@ const Footer = () => {
             </div>
 
             {/* Column 2: Plant Categories */}
-            <div className="col-12 col-md-6 col-lg-3 text-center text-md-start">
+            <div className="col-6 col-md-3 text-center text-md-start">
               <h4 className="footer-title mb-4">تصنيفات النباتات</h4>
               <div className="d-flex flex-column gap-3">
                 <a href="/products" className="footer-link">أشجار</a>
@@ -54,7 +54,7 @@ const Footer = () => {
             </div>
 
             {/* Column 3: Quick Links */}
-            <div className="col-12 col-md-6 col-lg-3 text-center text-md-start">
+            <div className="col-6 col-md-3 text-center text-md-start">
               <h4 className="footer-title mb-4">روابط سريعة</h4>
               <div className="d-flex flex-column gap-3">
                 <a href="/" className="footer-link active">الرئيسية</a>
@@ -65,7 +65,7 @@ const Footer = () => {
             </div>
 
             {/* Column 4: Social Media */}
-            <div className="col-12 col-md-6 col-lg-3 text-center text-md-start">
+            <div className="col-6 col-md-3 text-center text-md-start">
               <h4 className="footer-title mb-4">تابعونا على</h4>
               <div className="social-links d-flex justify-content-center justify-content-md-start gap-3">
                 <a href="#" className="social-link" aria-label="youtube"><i className="fab fa-youtube"></i></a>
