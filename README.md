@@ -1,12 +1,59 @@
-# React + Vite
+## Green Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the Green project, built to provide a modern, responsive user experience for landscape and product booking, events, and more.
 
-Currently, two official plugins are available:
+### Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**: UI library for building interactive user interfaces
+- **Vite**: Fast build tool and development server
+- **JavaScript (ES6+)**: Main programming language
+- **CSS Modules**: Scoped styling for components
+- **Context API**: State management across the app
+- **ESLint**: Linting and code quality
 
-## Expanding the ESLint configuration
+### Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm (comes with Node.js)
+
+#### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/8989as/green-frontend.git
+   cd green-frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+#### Running the Project
+Start the development server:
+```bash
+npm run dev
+```
+The app will be available at [http://localhost:5173](http://localhost:5173) by default.
+
+#### Building for Production
+To build the project for production:
+```bash
+npm run build
+```
+The output will be in the `dist/` folder.
+
+#### Linting
+To check code quality:
+```bash
+npm run lint
+```
+
+### Project Structure
+
+- `src/` - Main source code
+- `public/` - Static assets
+- `package.json` - Project metadata and scripts
+- `vite.config.js` - Vite configuration
+
+### Contact
+For questions or support, please open an issue or contact the repository owner.
