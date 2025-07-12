@@ -3,7 +3,9 @@ export const mockCategories = [
     { id: 1, name: "نباتات داخلية", name_latin: "Indoor Plants", value: 1 },
     { id: 2, name: "نباتات خارجية", name_latin: "Outdoor Plants", value: 2 },
     { id: 3, name: "نباتات مزٌهرة", name_latin: "Flowering Plants", value: 3 },
-    { id: 4, name: "صبارات", name_latin: "Succulents", value: 4 }
+    { id: 4, name: "صبارات", name_latin: "Succulents", value: 4 },
+    { id: 5, name: "نباتات عطرية", name_latin: "Aromatic Plants", value: 5 },
+    { id: 6, name: "نباتات زينة", name_latin: "Ornamental Plants", value: 6 }
 ];
 
 // Mock Colors (Arabic labels for default language)
@@ -109,6 +111,94 @@ export const mockProducts = [
             { id: 1, name: "صغير" },
             { id: 2, name: "متوسط" },
             { id: 3, name: "كبير" }
+        ],
+        is_saved: false
+    },
+    {
+        id: 4,
+        name: "صبار",
+        name_latin: "Cactaceae (Cactus)",
+        price: 80,
+        special_price: null,
+        description: "نبتة صبار مقاومة للجفاف",
+        images: [
+            {
+                id: 4,
+                url: "/assets/images/product_1.png",
+                small_image_url: "/assets/images/product_1.png",
+                medium_image_url: "/assets/images/product_1.png",
+                large_image_url: "/assets/images/product_1.png"
+            }
+        ],
+        categories: [
+            { id: 2, name: "نباتات خارجية" },
+            { id: 4, name: "صبارات" }
+        ],
+        colors: [
+            { id: 1, name: "أحمر", hex_code: "#FF0000" },
+            { id: 2, name: "أبيض", hex_code: "#FFFFFF" }
+        ],
+        sizes: [
+            { id: 1, name: "صغير" },
+            { id: 2, name: "متوسط" }
+        ],
+        is_saved: false
+    },
+    {
+        id: 5,
+        name: "نبات عطرية",
+        name_latin: "Aromatic Plant",
+        price: 90,
+        special_price: null,
+        description: "نبتة عطرية تضيف رائحة جميلة للمنزل",
+        images: [
+            {
+                id: 5,
+                url: "/assets/images/product_1.png",
+                small_image_url: "/assets/images/product_1.png",
+                medium_image_url: "/assets/images/product_1.png",
+                large_image_url: "/assets/images/product_1.png"
+            }
+        ],
+        categories: [
+            { id: 1, name: "نباتات داخلية" },
+            { id: 5, name: "نباتات عطرية" }
+        ],
+        colors: [
+            { id: 3, name: "وردي", hex_code: "#FFC0CB" }
+        ],
+        sizes: [
+            { id: 2, name: "متوسط" },
+            { id: 3, name: "كبير" }
+        ],
+        is_saved: false
+    },
+    {
+        id: 6,
+        name: "نبات زينة",
+        name_latin: "Ornamental Plant",
+        price: 110,
+        special_price: null,
+        description: "نبتة زينة تضيف لمسة جمالية للديكور",
+        images: [
+            {
+                id: 6,
+                url: "/assets/images/product_1.png",
+                small_image_url: "/assets/images/product_1.png",
+                medium_image_url: "/assets/images/product_1.png",
+                large_image_url: "/assets/images/product_1.png"
+            }
+        ],
+        categories: [
+            { id: 1, name: "نباتات داخلية" },
+            { id: 6, name: "نباتات زينة" }
+        ],
+        colors: [
+            { id: 4, name: "بنفسجي", hex_code: "#800080" }
+        ],
+        sizes: [
+            { id: 1, name: "صغير" },
+            { id: 2, name: "متوسط" }
         ],
         is_saved: false
     }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import api from '../services/api';
+// import api from '../services/api';
+import { mockProducts } from '../data/mockData';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import HomeHero from '../components/HomeHero/HomeHero';
@@ -20,15 +21,11 @@ const Home = () => {
     useEffect(() => {
         setLoading(true);
         setError(null);
-        api.get('/api/products?new=1&limit=4')
-            .then((res) => {
-                setProducts(res.data || []);
-                setLoading(false);
-            })
-            .catch((err) => {
-                setError(err?.message || 'Error fetching products');
-                setLoading(false);
-            });
+        // Simulate API call with mock data
+        setTimeout(() => {
+            setProducts(mockProducts.slice(0, 4));
+            setLoading(false);
+        }, 500); // Simulate network delay
     }, []);
 
     const handleViewProductDetails = (productId) => {
