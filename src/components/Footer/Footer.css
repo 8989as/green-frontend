@@ -1,99 +1,96 @@
+/*
+  Best Practices Applied:
+  1. CSS Custom Properties (Variables) for theming and easy maintenance.
+  2. Simplified selectors, relying more on Bootstrap utilities from the JSX.
+  3. Removed redundant media queries that are now handled by Bootstrap's grid.
+*/
+
+:root {
+  --primary-green: #3D853C;
+  --dark-green: #224921;
+  --text-muted-green: #6F816E;
+  --background-light: #ECF3EC;
+  --background-medium: #C3D9C3;
+  --text-dark: #1A3819;
+  --white: #FFFFFF;
+  --border-color: #3D853C;
+  --font-family-main: 'El Messiri', sans-serif;
+}
+
 .footer {
-  font-family: 'El Messiri', sans-serif;
+  font-family: var(--font-family-main);
+  /* The background color is now set on the inner elements */
 }
 
 .footer-main {
-  background: #ECF3EC;
+  background-color: var(--background-light);
+}
+
+.footer-bottom {
+  background-color: var(--background-medium);
 }
 
 .footer-title {
-  color: #224921;
+  color: var(--dark-green);
   font-size: 20px;
   font-weight: 600;
   line-height: 1.35;
-}
-
-.footer-contact-wrapper {
-  display: inline-flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.footer-contact-title {
-  color: #224921;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-.footer-contact-item {
-  width: 100%;
 }
 
 .footer-contact-label {
-  color: #3D853C;
+  color: var(--primary-green);
   font-size: 16px;
   font-weight: 700;
 }
 
 .footer-contact-value {
-  color: #6F816E;
+  color: var(--text-muted-green);
   font-size: 16px;
   font-weight: 400;
 }
 
 .footer-link {
-  color: #6F816E;
+  color: var(--text-muted-green);
   font-size: 16px;
   font-weight: 400;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.footer-link:hover {
-  color: #3D853C;
-}
-
+.footer-link:hover,
 .footer-link.active {
-  color: #3D853C;
+  color: var(--primary-green);
 }
 
-.social-links {
-  display: flex;
-  gap: 16px;
-}
-
+/* Social link styles */
 .social-link {
   width: 40px;
   height: 40px;
-  display: flex;
+  display: inline-flex; /* Changed from flex to inline-flex */
   align-items: center;
   justify-content: center;
-  background: #ECF3EC;
-  border: 1.2px solid #3D853C;
+  background-color: transparent; /* Changed from fixed color */
+  border: 1.2px solid var(--border-color);
   border-radius: 5px;
-  padding: 10px;
   transition: all 0.3s ease;
 }
 
 .social-link i {
-  color: #3D853C;
+  color: var(--primary-green);
   font-size: 18px;
   transition: color 0.3s ease;
 }
 
 .social-link:hover {
-  background: #3D853C;
+  background-color: var(--primary-green);
+  border-color: var(--primary-green);
 }
 
 .social-link:hover i {
-  color: #FFFFFF;
+  color: var(--white);
 }
 
-.footer-bottom {
-  background: #C3D9C3;
-}
-
+/* Payment and Copyright styles */
 .payment-icon {
   height: 20px;
   width: auto;
@@ -104,45 +101,22 @@
   opacity: 0.8;
 }
 
-.text-dark-green {
-  color: #1A3819;
+.copyright-text {
   font-size: 16px;
+  line-height: 1.5;
+}
+
+.copyright-text .text-dark-green {
+  color: var(--text-dark);
   font-weight: 400;
-  line-height: 1.35;
 }
 
-.text-primary-green {
-  color: #3D853C;
-  font-size: 16px;
-  line-height: 1.35;
+.copyright-text .text-primary-green {
+  color: var(--primary-green);
+  text-decoration: none; /* Remove underline from links in copyright */
+  transition: color 0.3s ease;
 }
 
-/* Responsive Styles */
-@media (max-width: 991.98px) {
-  .footer-contact-wrapper {
-    margin-bottom: 2rem;
-  }
-  
-  .copyright-text {
-    text-align: center !important;
-  }
-  
-  .social-links {
-    justify-content: flex-end;
-    margin-top: 1rem;
-  }
-}
-
-@media (max-width: 767.98px) {
-  .footer-contact-wrapper {
-    text-align: center;
-  }
-
-  .social-links {
-    justify-content: center;
-  }
-  
-  .payment-icon {
-    height: 18px;
-  }
+.copyright-text .text-primary-green:hover {
+    color: var(--dark-green);
 }
